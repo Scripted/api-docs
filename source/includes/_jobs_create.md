@@ -45,6 +45,8 @@ curl -H "Authorization: Bearer abcdefghij0123456789" \
     -d industries[][id]=f0709aabc7050b3eed7c43db83f0f4cf
 ```
 
+`POST /:organization_key/v1/jobs`
+
 To create a Job, pass a [JobTemplate](#job-templates) and answers for that JobTemplate's [Prompts](#prompts).
 
 Either a list of Industries or a single Specialty must also be included.

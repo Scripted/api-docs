@@ -12,9 +12,13 @@ ScriptedClient::Job.draft_ready
 curl -H "Authorization: Bearer abcdefghij0123456789" \
     https://api.scripted.com/abcd1234/v1/jobs
 
+# Or if you want to filter by state
+
 curl -H "Authorization: Bearer abcdefghij0123456789" \
-    https://api.scripted.com/abcd1234/v1/jobs?filter=draft_ready
+    https://api.scripted.com/abcd1234/v1/jobs/draft_ready
 ```
+
+`GET /:organization_key/v1/jobs`
 
 You can pass any of the following filters to narrow your results:
 
