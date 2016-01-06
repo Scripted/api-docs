@@ -54,7 +54,7 @@
 
 <p>Welcome to the <strong>Scripted API</strong>. As far as we know, it&rsquo;s the only way to programatically and scaleably generate original, creative written content.</p>
 
-<p>This API follows <strong>RESTful</strong> conventions and communicates in <strong>JSON</strong>. One caveat before we begin: due to the nature of content, this API is kind of asynchronous. You can post a job synchronously, but you&rsquo;ll have to come back 3-5 days later to retrieve the written content. If you need us to fire webhooks upon events (e.g. - &ldquo;your content is ready for review&rdquo;) please get in touch!</p>
+<p>This API follows <strong>RESTful</strong> conventions and communicates in <strong>JSON</strong>. One caveat before we begin: due to the nature of content, this API is kind of asynchronous. You can post a job synchronously, but you&rsquo;ll have to come back 3-5 days later to <a href="#get-a-job-39-s-html-contents">retrieve the written content</a>. If you need us to fire webhooks upon events (e.g. - &ldquo;your content is ready for review&rdquo;) please get in touch!</p>
 
           <h1 id="authentication">Authentication</h1>
 
@@ -139,7 +139,127 @@ and <code class="prettyprint">abcdefghij0123456789</code> with your Token!</p>
 
           <h1 id="jobs">Jobs</h1>
 
+<blockquote>
+<p>Sample Job</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec06a6e02a37e7000318"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Where to buy an Orangutan"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"copyediting"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"deadline_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-04T01:30:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-24T23:00:22Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"pitch"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"content_format"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000d5"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Standard Blog Post"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pitchable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"length_metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"350-450 words"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"pricing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">9900</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"writer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec01a6e02a37e700003b"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bob L."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"favorite"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec06a6e02a37e700031a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Document"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"prompts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec06a6e02a37e700031e"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkbox"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select one or many"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Informed analysis"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"answer_required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Informed analysis"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Thought leadership"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Repurpose existing writing"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Promote topic"</span><span class="p">,</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"guidelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ebfc93be3b2c623b6e63"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Anecdotal"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tone"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"industries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ebfc93be3b2c623b6e2a"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Education"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p>Jobs are at the very center of the Scripted domain model. They represent a request for writing to be fulfilled by one of our freelancers. They are forged from a <a href="#job-templates">JobTemplate</a>, and include either a list of <a href="#industries">Industries</a> or a single <a href="#specialties">Specialty</a>. Specialist jobs are completed by freelancers with more depth of knowledge, so they cost a bit more.</p>
+
+<p><code class="prettyprint">state</code> can be any of the following:</p>
+
+<table><thead>
+<tr>
+<th>State</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hold</td>
+<td>Paused by a Scripted employee for further clarification.</td>
+</tr>
+<tr>
+<td>awaiting author</td>
+<td>Submitted to Writers but not yet claimed.</td>
+</tr>
+<tr>
+<td>writing</td>
+<td>In the process of being written.</td>
+</tr>
+<tr>
+<td>copyediting</td>
+<td>Being screened for plagiarism or reviewed by an Editor.</td>
+</tr>
+<tr>
+<td>ready for review</td>
+<td>First draft is ready and awaiting your revision requests.</td>
+</tr>
+<tr>
+<td>revising</td>
+<td>Writer is incorporating your revision requests.</td>
+</tr>
+<tr>
+<td>ready for acceptance</td>
+<td>Final draft is ready. You can either accept or reject.</td>
+</tr>
+<tr>
+<td>accepted</td>
+<td>Accepted and charged.</td>
+</tr>
+<tr>
+<td>canceled</td>
+<td>Canceled and not charged.</td>
+</tr>
+<tr>
+<td>rejected</td>
+<td>Rejected and not charged.</td>
+</tr>
+</tbody></table>
 
           <h2 id="create-a-job">Create a Job</h2>
 <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'scripted_client'</span>
@@ -184,6 +304,8 @@ and <code class="prettyprint">abcdefghij0123456789</code> with your Token!</p>
     -d industries[][id]<span class="o">=</span>f0709aabc7050b3eed7c43db83f0f4cf
 </code></pre>
 
+<p><code class="prettyprint">POST /:organization_key/v1/jobs</code></p>
+
 <p>To create a Job, pass a <a href="#job-templates">JobTemplate</a> and answers for that JobTemplate&rsquo;s <a href="#prompts">Prompts</a>.</p>
 
 <p>Either a list of Industries or a single Specialty must also be included.</p>
@@ -200,9 +322,13 @@ and <code class="prettyprint">abcdefghij0123456789</code> with your Token!</p>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
     https://api.scripted.com/abcd1234/v1/jobs
 
+<span class="c"># Or if you want to filter by state</span>
+
 curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
-    https://api.scripted.com/abcd1234/v1/jobs?filter<span class="o">=</span>draft_ready
+    https://api.scripted.com/abcd1234/v1/jobs/draft_ready
 </code></pre>
+
+<p><code class="prettyprint">GET /:organization_key/v1/jobs</code></p>
 
 <p>You can pass any of the following filters to narrow your results:</p>
 
@@ -221,12 +347,16 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
     https://api.scripted.com/abcd1234/v1/jobs/5ceb8bb8235bcc76bf475e21
 </code></pre>
 
+<p><code class="prettyprint">GET /:organization_key/v1/jobs/:id</code></p>
+
 <h2 id="get-a-job-39-s-html-contents">Get a Job&rsquo;s HTML Contents</h2>
 <pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s1">'5ceb8bb8235bcc76bf475e21'</span><span class="p">).</span><span class="nf">html_contents</span>
 </code></pre>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
     https://api.scripted.com/abcd1234/v1/jobs/5ceb8bb8235bcc76bf475e21/html_contents
 </code></pre>
+
+<p><code class="prettyprint">GET /:organization_key/v1/jobs/:id/html_contents</code></p>
 
 <p>To retrieve the actual writing, you have to hit a separate endpoint. It returns an Array of HTML Strings.</p>
 
@@ -237,10 +367,163 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
           <h1 id="pitches">Pitches</h1>
 
           <h1 id="job-templates">Job Templates</h1>
+<pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">JobTemplate</span><span class="p">.</span><span class="nf">all</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/job_templates
+</code></pre>
+
+<blockquote>
+<p>Sample JobTemplate</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000cc"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Standard Blog Post"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-24T15:00:18-08:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"content_format"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000d5"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Standard Blog Post"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pitchable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"length_metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"350-450 words"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"pricing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="mi">9900</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"specialist"</span><span class="p">:</span><span class="w"> </span><span class="mi">14900</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"prompts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000d8"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkbox"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select one or many"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"answer_required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Informed analysis"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Thought leadership"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Repurpose existing writing"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Promote topic"</span><span class="p">,</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000da"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string[255]"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Blog"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Link to an existing blog and describe why it's a good sample"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"answer_required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000dc"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkbox"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Blog Structure"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select one or many"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"answer_required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Paragraphs"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Subheads"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Lists"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000de"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Key Points"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"List key points your writer should address"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"answer_required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000e3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"radio"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Links to Sources"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select one"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"answer_required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Include sources as linked anchor text"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Include sources as source list"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"No sources"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span></code></pre>
+
+<p>A JobTemplate has a <a href="#content-formats">ContentFormat</a>, such as a <em>Short Blog Post</em>, and a collection of <a href="#prompts">Prompts</a> to that are designed to help guide your writer.</p>
 
           <h1 id="content-formats">Content Formats</h1>
 
+<blockquote>
+<p>Sample ContentFormat</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000d5"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Standard Blog Post"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"pitchable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"length_metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"350-450 words"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"quantity_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="mi">1</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
           <h1 id="prompts">Prompts</h1>
+
+<blockquote>
+<p>Sample Prompt</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000d8"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkbox"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goal"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select one or many"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"answer_required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"value_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Informed analysis"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Thought leadership"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Repurpose existing writing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Promote topic"</span><span class="p">,</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Prompts are question/answer pairs that help guide your writer. They can be one of five kinds: <code class="prettyprint">string[255]</code> <code class="prettyprint">string[1024]</code> <code class="prettyprint">radio</code> <code class="prettyprint">checkbox</code> <code class="prettyprint">array</code>. The data type of the <code class="prettyprint">value</code> that you post will depend on the kind of the Prompt:</p>
+
+<table><thead>
+<tr>
+<th>Kind</th>
+<th>Value Type</th>
+<th>Has <code class="prettyprint">value_options</code>?</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string[255]</td>
+<td>String (max. 255 characters)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>string[1024]</td>
+<td>String (max. 1024 characters)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>radio</td>
+<td>String</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>checkbox</td>
+<td>Array</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>array</td>
+<td>Array</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">If a Prompt has value_options, the value you pass must be one of the options. If answer_required is true, you must provide a value.</aside>
 
           <h1 id="industries">Industries</h1>
 
