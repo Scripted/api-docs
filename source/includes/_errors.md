@@ -1,20 +1,25 @@
 # Errors
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+> Errors are returned in an Array like so:
 
-The Kittn API uses the following error codes:
+```json
 
+    {
+      "errors": [
+        "Topic is too long (maximum is 255 characters)",
+        "Quantity must be one of the ContentFormat's quantity_options"
+      ]
+    }
 
-Error Code | Meaning
+```
+
+The Scripted API does not always return a `200 OK` status.
+
+Status | Meaning
 ---------- | -------
-400 | Bad Request -- Your request sucks
-401 | Unauthorized -- Your API key is wrong
-403 | Forbidden -- The kitten requested is hidden for administrators only
-404 | Not Found -- The specified kitten could not be found
-405 | Method Not Allowed -- You tried to access a kitten with an invalid method
-406 | Not Acceptable -- You requested a format that isn't json
-410 | Gone -- The kitten requested has been removed from our servers
-418 | I'm a teapot
-429 | Too Many Requests -- You're requesting too many kittens! Slow down!
+400 | Bad Request -- The request was malformed in some way.
+401 | Unauthorized -- The Token provided was invalid or expired.
+403 | Forbidden -- The Token provided does not have access to the namespace's Organization Key.
+404 | Not Found -- The specified resource could not be found
 500 | Internal Server Error -- We had a problem with our server. Try again later.
 503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.
