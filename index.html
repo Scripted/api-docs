@@ -13,7 +13,7 @@
 
       <script>
         $(function() {
-          setupLanguages(["shell","ruby","python"]);
+          setupLanguages(["ruby","shell"]);
         });
       </script>
   </head>
@@ -28,9 +28,8 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="shell">shell</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -39,218 +38,94 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://dashboard.scripted.com/business/register'>Sign Up for an Account</a></li>
             <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
-
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
-
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
-
-<h1 id="authentication">Authentication</h1>
+        
+          <h1 id="introduction">Introduction</h1>
 
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>Heads up! Most of the Ruby examples use the <code class="prettyprint">scripted_client</code> RubyGem. To get started using the Gem, check out the <a href="https://github.com/Scripted/ScriptedClient">docs</a>!</p>
 </blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>Welcome to the <strong>Scripted API</strong>. As far as we know, it&rsquo;s the only way to programatically and scaleably generate original, creative written content.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<p>This API follows <strong>RESTful</strong> conventions and communicates in <strong>JSON</strong>. One caveat before we begin: due to the nature of content, this API is kind of asynchronous. You can post a job synchronously, but you&rsquo;ll have to come back 3-5 days later to retrieve the written content. If you need us to fire webhooks upon events (e.g. - &ldquo;your content is ready for review&rdquo;) please get in touch!</p>
+
+          <h1 id="authentication">Authentication</h1>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
+<p>Don&rsquo;t forget to replace <code class="prettyprint">abcd1234</code> with your Organization Key
+and <code class="prettyprint">abcdefghij0123456789</code> with your Token!</p>
 </blockquote>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"https://api.scripted.com/abcd1234/v1/industries"</span><span class="p">)</span>
+<span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">start</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">,</span> <span class="ss">use_ssl: </span><span class="kp">true</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">http</span><span class="o">|</span>
+  <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+  <span class="n">request</span><span class="p">[</span><span class="s2">"Content-Type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"application/json"</span>
+  <span class="n">request</span><span class="p">[</span><span class="s2">"Authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Bearer abcdefghij0123456789"</span>
+  <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span> <span class="n">request</span>
+  <span class="n">parsed</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+<span class="k">end</span>
 </code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/industries
 </code></pre>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
+<p>We use two factors to authenticate requests, an <strong>Organization Key</strong> and a <strong>JSON Web Token</strong>. You can find both of them in your Scripted dashboard by navigating to Account Settings and clicking on the API tab. All requests are namespaced under the relevant <strong>Organization Key</strong>, for example:</p>
 
-<p>This endpoint retrieves all kittens.</p>
+<p><code class="prettyprint">GET /v1/abcd1234/jobs</code></p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p><strong>Tokens</strong> are passed as a <code class="prettyprint">Bearer</code> in the <code class="prettyprint">Authorization</code> header, like so:</p>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+<p><code class="prettyprint">Bearer abcdefghij0123456789</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
+<p>All requests must be made over <code class="prettyprint">HTTPS</code>.</p>
 
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<blockquote>
+<p>Errors are returned in an Array like so:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Topic is too long (maximum is 255 characters)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Quantity must be one of the ContentFormat's quantity_options"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 
-<p>The Kittn API uses the following error codes:</p>
+</span></code></pre>
+
+<p>The Scripted API does not always return a <code class="prettyprint">200 OK</code> status.</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
+<th>Status</th>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td>Bad Request &ndash; The request was malformed in some way.</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>Unauthorized &ndash; The Token provided was invalid or expired.</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>Forbidden &ndash; The Token provided does not have access to the namespace&rsquo;s Organization Key.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>Not Found &ndash; The specified resource could not be found</td>
 </tr>
 <tr>
 <td>500</td>
@@ -262,12 +137,124 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </tbody></table>
 
+          <h1 id="jobs">Jobs</h1>
+
+<p>Jobs are at the very center of the Scripted domain model. They represent a request for writing to be fulfilled by one of our freelancers. They are forged from a <a href="#job-templates">JobTemplate</a>, and include either a list of <a href="#industries">Industries</a> or a single <a href="#specialties">Specialty</a>. Specialist jobs are completed by freelancers with more depth of knowledge, so they cost a bit more.</p>
+
+          <h2 id="create-a-job">Create a Job</h2>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'scripted_client'</span>
+
+<span class="c1"># First, find a JobTemplate that you'd like to use:</span>
+
+<span class="n">templates</span> <span class="o">=</span> <span class="no">ScriptedClient</span><span class="o">::</span><span class="no">JobTemplate</span><span class="p">.</span><span class="nf">all</span>
+<span class="n">blog_post</span> <span class="o">=</span> <span class="n">templates</span><span class="p">.</span><span class="nf">find</span> <span class="p">{</span> <span class="o">|</span><span class="n">template</span><span class="o">|</span> <span class="n">template</span><span class="p">.</span><span class="nf">name</span> <span class="o">==</span> <span class="s1">'Standard Blog Post'</span> <span class="p">}</span>
+
+<span class="c1"># Next, assign some values for the Prompts on that JobTemplate.</span>
+
+<span class="n">key_points</span> <span class="o">=</span> <span class="n">blog_post</span><span class="p">.</span><span class="nf">prompts</span><span class="p">.</span><span class="nf">find</span> <span class="p">{</span> <span class="o">|</span><span class="n">prompt</span><span class="o">|</span> <span class="n">prompt</span><span class="p">.</span><span class="nf">label</span> <span class="o">==</span> <span class="s1">'Key Points'</span> <span class="p">}</span>
+<span class="n">key_points</span><span class="p">.</span><span class="nf">value</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Orangutans make great pets'</span><span class="p">,</span> <span class="s1">'Normal pets are lame'</span><span class="p">]</span>
+
+<span class="c1"># Next, you can find an Industry:</span>
+
+<span class="n">industries</span> <span class="o">=</span> <span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Industry</span><span class="p">.</span><span class="nf">all</span>
+<span class="n">lifestyle</span> <span class="o">=</span> <span class="n">industries</span><span class="p">.</span><span class="nf">find</span> <span class="p">{</span> <span class="o">|</span><span class="n">industry</span><span class="o">|</span> <span class="n">industry</span><span class="p">.</span><span class="nf">name</span> <span class="o">==</span> <span class="s1">'Lifestyle &amp; Travel'</span> <span class="p">}</span>
+
+<span class="c1"># Now you can create the Job!</span>
+
+<span class="n">job</span> <span class="o">=</span> <span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span>
+  <span class="ss">topic: </span><span class="s1">'Top 10 Reasons to Buy an Orangutan'</span><span class="p">,</span>
+  <span class="ss">job_template: </span><span class="n">blog_post</span><span class="p">,</span>
+  <span class="ss">industries: </span><span class="p">[</span><span class="n">lifestyle</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">job</span><span class="p">.</span><span class="nf">save</span>
+<span class="c1"># =&gt; true</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+  https://api.scripted.com/abcd1234/v1/jobs <span class="se">\</span>
+    -d <span class="nv">topic</span><span class="o">=</span><span class="s2">"Why a rug can tie a room together"</span>  <span class="se">\</span>
+    -d job_template[id]<span class="o">=</span>5ceb8bb8235bcc76bf475e21 <span class="se">\</span>
+    -d job_template[prompts][][id]<span class="o">=</span>52cdda2f8b588f7e02000062 <span class="se">\</span>
+    -d job_template[prompts][][value]<span class="o">=</span>Yes <span class="se">\</span>
+    -d job_template[prompts][][id]<span class="o">=</span>52cdda2f8b588f7e02000064 <span class="se">\</span>
+    -d job_template[prompts][][value]<span class="o">=</span><span class="c">#apifuntimes \</span>
+    -d guidelines[][id]<span class="o">=</span>e9d378cc8e74b4b5faa34892935d5665 <span class="se">\</span>
+    -d guidelines[][id]<span class="o">=</span>689ca0246221f2f21e80e9dac9387bce <span class="se">\</span>
+    -d industries[][id]<span class="o">=</span>8af7c7ae67b6d0854051378b9f3eede4 <span class="se">\</span>
+    -d industries[][id]<span class="o">=</span>92e4132ea0560de3c12f072dc9a81486 <span class="se">\</span>
+    -d industries[][id]<span class="o">=</span>f0709aabc7050b3eed7c43db83f0f4cf
+</code></pre>
+
+<p>To create a Job, pass a <a href="#job-templates">JobTemplate</a> and answers for that JobTemplate&rsquo;s <a href="#prompts">Prompts</a>.</p>
+
+<p>Either a list of Industries or a single Specialty must also be included.</p>
+
+<p>Guidelines are optional.</p>
+
+          <h2 id="list-all-jobs">List all Jobs</h2>
+<pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">all</span>
+
+<span class="c1"># Or if you want to filter by state</span>
+
+<span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">draft_ready</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/jobs
+
+curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/jobs?filter<span class="o">=</span>draft_ready
+</code></pre>
+
+<p>You can pass any of the following filters to narrow your results:</p>
+
+<p><code class="prettyprint">screening</code> <code class="prettyprint">writing</code> <code class="prettyprint">draft_ready</code> <code class="prettyprint">revising</code> <code class="prettyprint">final_ready</code> <code class="prettyprint">in_progress</code> <code class="prettyprint">needs_review</code> <code class="prettyprint">accepted</code> <code class="prettyprint">rejected</code> <code class="prettyprint">finished</code></p>
+
+<p>See <a href="#pagination">Pagination</a> if you have more than 15 jobs.</p>
+
+          <h2 id="show-a-job">Show a Job</h2>
+
+<blockquote>
+<p>Don&rsquo;t forget to replace <code class="prettyprint">5ceb8bb8235bcc76bf475e21</code> with the <code class="prettyprint">ID</code> of one of your jobs!</p>
+</blockquote>
+<pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s1">'5ceb8bb8235bcc76bf475e21'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/jobs/5ceb8bb8235bcc76bf475e21
+</code></pre>
+
+<h2 id="get-a-job-39-s-html-contents">Get a Job&rsquo;s HTML Contents</h2>
+<pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s1">'5ceb8bb8235bcc76bf475e21'</span><span class="p">).</span><span class="nf">html_contents</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/jobs/5ceb8bb8235bcc76bf475e21/html_contents
+</code></pre>
+
+<p>To retrieve the actual writing, you have to hit a separate endpoint. It returns an Array of HTML Strings.</p>
+
+          <h1 id="pitchsets">Pitchsets</h1>
+
+<p>Scripted&rsquo;s writers can pitch you content ideas. A Pitchset is a lot like a <a href="#jobs">Job</a> (it&rsquo;s forged from a JobTemplate with Prompt answers, Industries and Guidelines), but instead of being a request for writing, it is a request for <a href="#pitches">topics to be pitched by our writers</a>.</p>
+
+          <h1 id="pitches">Pitches</h1>
+
+          <h1 id="job-templates">Job Templates</h1>
+
+          <h1 id="content-formats">Content Formats</h1>
+
+          <h1 id="prompts">Prompts</h1>
+
+          <h1 id="industries">Industries</h1>
+
+          <h1 id="specialties">Specialties</h1>
+
+          <h1 id="guidelines">Guidelines</h1>
+
+          <h1 id="pagination">Pagination</h1>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="shell">shell</a>
           </div>
       </div>
     </div>
