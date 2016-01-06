@@ -80,7 +80,7 @@ and <code class="prettyprint">abcdefghij0123456789</code> with your Token!</p>
 
 <p>We use two factors to authenticate requests, an <strong>Organization Key</strong> and a <strong>JSON Web Token</strong>. You can find both of them in your Scripted dashboard by navigating to Account Settings and clicking on the API tab. All requests are namespaced under the relevant <strong>Organization Key</strong>, for example:</p>
 
-<p><code class="prettyprint">GET /v1/abcd1234/jobs</code></p>
+<p><code class="prettyprint">GET /abcd1234/v1/jobs</code></p>
 
 <p><strong>Tokens</strong> are passed as a <code class="prettyprint">Bearer</code> in the <code class="prettyprint">Authorization</code> header, like so:</p>
 
@@ -362,7 +362,7 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
 
           <h1 id="pitchsets">Pitchsets</h1>
 
-<p>Scripted&rsquo;s writers can pitch you content ideas. A Pitchset is a lot like a <a href="#jobs">Job</a> (it&rsquo;s forged from a JobTemplate with Prompt answers, Industries and Guidelines), but instead of being a request for writing, it is a request for <a href="#pitches">topics to be pitched by our writers</a>.</p>
+<p>Our writers can pitch you content ideas. A Pitchset is a lot like a <a href="#jobs">Job</a> (it&rsquo;s forged from a <a href="#job-templates">JobTemplate</a> with <a href="#prompts">Prompt</a> answers, <a href="#industries">Industries</a> and <a href="#guidelines">Guidelines</a>), but instead of being a request for writing, it is a request for <a href="#pitches">topics to be pitched by our writers</a>.</p>
 
           <h1 id="pitches">Pitches</h1>
 
@@ -449,7 +449,7 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
 </span><span class="p">}</span><span class="err">,</span><span class="w">
 </span></code></pre>
 
-<p>A JobTemplate has a <a href="#content-formats">ContentFormat</a>, such as a <em>Short Blog Post</em>, and a collection of <a href="#prompts">Prompts</a> to that are designed to help guide your writer.</p>
+<p>A JobTemplate has a <a href="#content-formats">ContentFormat</a>, such as a <strong>Short Blog Post</strong>, and a collection of <a href="#prompts">Prompts</a> to that are designed to help guide your writer.</p>
 
           <h1 id="content-formats">Content Formats</h1>
 
@@ -526,12 +526,96 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
 <aside class="warning">If a Prompt has value_options, the value you pass must be one of the options. If answer_required is true, you must provide a value.</aside>
 
           <h1 id="industries">Industries</h1>
+<pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Industry</span><span class="p">.</span><span class="nf">all</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/industries
+</code></pre>
+
+<blockquote>
+<p>Sample Industry</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ebfc93be3b2c623b6e2f"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Publishing &amp; Journalism"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"specialties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ebfc93be3b2c623b6eab"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Self Publishing"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">GET /:organization_key/v1/industries</code></p>
+
+<p>Industries specify the topic area of your <a href="#jobs">Job</a> or <a href="#pitchsets">Pitchset</a>. They also have a list of associated <a href="#specialties">Specialties</a> if you&rsquo;d like a Writer with more depth of knowledge.</p>
 
           <h1 id="specialties">Specialties</h1>
+<pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Specialty</span><span class="p">.</span><span class="nf">all</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/specialties
+</code></pre>
+
+<blockquote>
+<p>Sample Specialty</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ebfc93be3b2c623b6eb1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Video Games"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">GET /:organization_key/v1/specialties</code></p>
+
+<p>If you&rsquo;re willing to pay a bit more (see <a href="#job-templates">JobTemplate#pricing</a>) for a Specialist writer, you can include a Specialty (instead of a list of <a href="#industries">Industries</a>) when you create a <a href="#jobs">Job</a> or <a href="#pitchsets">Pitchset</a>.</p>
 
           <h1 id="guidelines">Guidelines</h1>
+<pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Guideline</span><span class="p">.</span><span class="nf">all</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/guidelines
+</code></pre>
+
+<blockquote>
+<p>Sample Guideline</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ebfc93be3b2c623b6e63"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Anecdotal"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tone"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">GET /:organization_key/v1/guidelines</code></p>
+
+<p>Guidelines are optional. <a href="#jobs">Jobs</a> and <a href="#pitchsets">Pitchsets</a> can have many of them.</p>
 
           <h1 id="pagination">Pagination</h1>
+<pre class="highlight ruby"><code><span class="n">jobs</span> <span class="o">=</span> <span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">all</span>
+<span class="n">jobs</span><span class="p">.</span><span class="nf">has_next?</span>
+<span class="c1"># =&gt; true</span>
+<span class="n">page_two</span> <span class="o">=</span> <span class="n">jobs</span><span class="p">.</span><span class="nf">next</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/jobs <span class="se">\</span>
+    -d <span class="nv">next_cursor</span><span class="o">=</span><span class="s1">'MTQwMDg4OTU0NDoy'</span>
+</code></pre>
+
+<blockquote>
+<p>Sample Cursor</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{}],</span><span class="w">
+  </span><span class="nt">"paging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"has_next"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MTQwMDg4OTU0NDoy"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>We use cursor-based pagination. A single API request returns <code class="prettyprint">15</code> records by default. If a list is longer than <code class="prettyprint">15</code> objects, we&rsquo;ll return the first page and a <code class="prettyprint">next_cursor</code> that you can pass on your next request to the list endpoint.</p>
 
       </div>
       <div class="dark-box">
