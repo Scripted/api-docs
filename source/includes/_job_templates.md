@@ -85,4 +85,4 @@ curl -H "Authorization: Bearer abcdefghij0123456789" \
 },
 ```
 
-A JobTemplate has a [ContentFormat](#content-formats), such as a *Short Blog Post*, and a collection of [Prompts](#prompts) to that are designed to help guide your writer.
+A JobTemplate has a [ContentFormat](#content-formats), such as a **Short Blog Post**, and a collection of [Prompts](#prompts) to that are designed to help guide your writer.

@@ -24,7 +24,7 @@ curl -H "Authorization: Bearer abcdefghij0123456789" \
 
 We use two factors to authenticate requests, an **Organization Key** and a **JSON Web Token**. You can find both of them in your Scripted dashboard by navigating to Account Settings and clicking on the API tab. All requests are namespaced under the relevant **Organization Key**, for example:
 
-`GET /v1/abcd1234/jobs`
+`GET /abcd1234/v1/jobs`
 
 **Tokens** are passed as a `Bearer` in the `Authorization` header, like so:
 
