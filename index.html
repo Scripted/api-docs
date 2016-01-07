@@ -447,6 +447,59 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
 </tbody></table>
 
           <h2 id="create-a-pitchset">Create a Pitchset</h2>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'scripted_client'</span>
+
+<span class="c1"># First, find a JobTemplate that you'd like to use:</span>
+
+<span class="n">templates</span> <span class="o">=</span> <span class="no">ScriptedClient</span><span class="o">::</span><span class="no">JobTemplate</span><span class="p">.</span><span class="nf">all</span>
+<span class="n">blog_post</span> <span class="o">=</span> <span class="n">templates</span><span class="p">.</span><span class="nf">find</span> <span class="p">{</span> <span class="o">|</span><span class="n">template</span><span class="o">|</span> <span class="n">template</span><span class="p">.</span><span class="nf">name</span> <span class="o">==</span> <span class="s1">'Standard Blog Post'</span> <span class="p">}</span>
+
+<span class="c1"># Next, assign some values for the Prompts on that JobTemplate.</span>
+
+<span class="n">key_points</span> <span class="o">=</span> <span class="n">blog_post</span><span class="p">.</span><span class="nf">prompts</span><span class="p">.</span><span class="nf">find</span> <span class="p">{</span> <span class="o">|</span><span class="n">prompt</span><span class="o">|</span> <span class="n">prompt</span><span class="p">.</span><span class="nf">label</span> <span class="o">==</span> <span class="s1">'Key Points'</span> <span class="p">}</span>
+<span class="n">key_points</span><span class="p">.</span><span class="nf">value</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Orangutans make great pets'</span><span class="p">,</span> <span class="s1">'Normal pets are lame'</span><span class="p">]</span>
+
+<span class="c1"># Next, you can find an Industry:</span>
+
+<span class="n">industries</span> <span class="o">=</span> <span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Industry</span><span class="p">.</span><span class="nf">all</span>
+<span class="n">lifestyle</span> <span class="o">=</span> <span class="n">industries</span><span class="p">.</span><span class="nf">find</span> <span class="p">{</span> <span class="o">|</span><span class="n">industry</span><span class="o">|</span> <span class="n">industry</span><span class="p">.</span><span class="nf">name</span> <span class="o">==</span> <span class="s1">'Lifestyle &amp; Travel'</span> <span class="p">}</span>
+
+<span class="c1"># Now you can create the Pitchset!</span>
+
+<span class="n">pitchset</span> <span class="o">=</span> <span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Pitchset</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span>
+  <span class="ss">tagline: </span><span class="s1">'Cool Ideas for Zoo-centric Content'</span><span class="p">,</span>
+  <span class="ss">number_of_jobs_requested: </span><span class="mi">3</span><span class="p">,</span>
+  <span class="ss">job_template: </span><span class="n">blog_post</span><span class="p">,</span>
+  <span class="ss">industries: </span><span class="p">[</span><span class="n">lifestyle</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">pitchset</span><span class="p">.</span><span class="nf">save</span>
+<span class="c1"># =&gt; true</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+  https://api.scripted.com/abcd1234/v1/pitchsets <span class="se">\</span>
+    -d <span class="nv">tagline</span><span class="o">=</span><span class="s2">"Cool Ideas for Zoo-centric Content"</span> <span class="se">\</span>
+    -d <span class="nv">number_of_jobs_requested</span><span class="o">=</span>3 <span class="se">\</span>
+    -d job_template[id]<span class="o">=</span>5ceb8bb8235bcc76bf475e21 <span class="se">\</span>
+    -d job_template[prompts][][id]<span class="o">=</span>52cdda2f8b588f7e02000062 <span class="se">\</span>
+    -d job_template[prompts][][value]<span class="o">=</span>Yes <span class="se">\</span>
+    -d job_template[prompts][][id]<span class="o">=</span>52cdda2f8b588f7e02000064 <span class="se">\</span>
+    -d job_template[prompts][][value]<span class="o">=</span><span class="c">#apifuntimes \</span>
+    -d guidelines[][id]<span class="o">=</span>e9d378cc8e74b4b5faa34892935d5665 <span class="se">\</span>
+    -d guidelines[][id]<span class="o">=</span>689ca0246221f2f21e80e9dac9387bce <span class="se">\</span>
+    -d industries[][id]<span class="o">=</span>8af7c7ae67b6d0854051378b9f3eede4 <span class="se">\</span>
+    -d industries[][id]<span class="o">=</span>92e4132ea0560de3c12f072dc9a81486 <span class="se">\</span>
+    -d industries[][id]<span class="o">=</span>f0709aabc7050b3eed7c43db83f0f4cf
+</code></pre>
+
+<p><code class="prettyprint">POST /:organization_key/v1/pitchsets</code></p>
+
+<p>Creating a Pitchset is very similar to creating a Job. Pass a <a href="#job-templates">JobTemplate</a> and answers for that JobTemplate&rsquo;s <a href="#prompts">Prompts</a>.</p>
+
+<p>Either a list of <a href="#industries">Industries</a> or a single <a href="#specialties">Specialty</a> must also be included.</p>
+
+<p>Guidelines are optional.</p>
+
+<aside class="warning">The JobTemplate you pick must have a ContentFormat whose pitchable is true!</aside>
 
           <h2 id="list-all-pitchsets">List all Pitchsets</h2>
 <pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Pitchset</span><span class="p">.</span><span class="nf">all</span>
@@ -480,11 +533,11 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
 </tr>
 <tr>
 <td>closed</td>
-<td>All Pitchset in <code class="prettyprint">marked_complete</code> and <code class="prettyprint">auto_closed</code> states. The &ldquo;Archived&rdquo; section of your &ldquo;Topic Pitches&rdquo; tab in the Scripted dashboard.</td>
+<td>All Pitchsets in <code class="prettyprint">marked_complete</code> and <code class="prettyprint">auto_closed</code> states. The &ldquo;Archived&rdquo; section of your &ldquo;Topic Pitches&rdquo; tab in the Scripted dashboard.</td>
 </tr>
 <tr>
 <td>requires_action</td>
-<td><code class="prettyprint">open</code> Pitchsets with at least one pending Pitch. The &ldquo;Action Items&rdquo; tab in the Scripted Dashboard</td>
+<td>Pitchsets in the <code class="prettyprint">open</code> state with at least one pending Pitch. The &ldquo;Action Items&rdquo; tab in the Scripted dashboard.</td>
 </tr>
 </tbody></table>
 
