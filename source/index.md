@@ -18,7 +18,13 @@ includes:
   - jobs_list
   - jobs_show
   - pitchsets
+  - pitchsets_create
+  - pitchsets_list
+  - pitchsets_show
   - pitches
+  - pitches_list
+  - pitches_accept
+  - pitches_reject
   - job_templates
   - content_formats
   - prompts

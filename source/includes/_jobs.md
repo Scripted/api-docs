@@ -63,9 +63,6 @@
       "id": "5654ebfc93be3b2c623b6e2a",
       "name": "Education"
     }
-  ],
-  "attachments": [
-
   ]
 }
 ```
