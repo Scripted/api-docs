@@ -303,11 +303,39 @@ and <code class="prettyprint">abcdefghij0123456789</code> with your Token!</p>
 
 <p><code class="prettyprint">POST /:organization_key/v1/jobs</code></p>
 
-<p>To create a Job, pass a <a href="#job-templates">JobTemplate</a> and answers for that JobTemplate&rsquo;s <a href="#prompts">Prompts</a>.</p>
+<p>To create a Job, pass a <a href="#job-templates">JobTemplate</a> and answers for that JobTemplate&rsquo;s <a href="#prompts">Prompts</a>. Either a list of Industries or a single Specialty must also be included. Guidelines are optional.</p>
 
-<p>Either a list of Industries or a single Specialty must also be included.</p>
-
-<p>Guidelines are optional.</p>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">job_template</code></td>
+<td><strong>Required</strong> Pick a <code class="prettyprint">JobTemplate</code> with a <code class="prettyprint">ContentFormat</code> whose <code class="prettyprint">pitchable</code> is true.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">topic</code></td>
+<td><strong>Required</strong> What&rsquo;s this Job all about?</td>
+</tr>
+<tr>
+<td><code class="prettyprint">quantity</code></td>
+<td><strong>Optional</strong> How many do you want?  Defaults to minimum of the <code class="prettyprint">ContentFormat#quantity_options</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">industries</code></td>
+<td><strong>Required unless Specialty is passed</strong> A list of high-level categories pertaining to your job.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">specialty</code></td>
+<td><strong>Required unless Industries are passed</strong> A deeper field of knowledge.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">guidelines</code></td>
+<td><strong>Optional</strong> Tone, Voice and Perspective.</td>
+</tr>
+</tbody></table>
 
           <h2 id="list-all-jobs">List all Jobs</h2>
 <pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">all</span>
@@ -493,13 +521,41 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
 
 <p><code class="prettyprint">POST /:organization_key/v1/pitchsets</code></p>
 
-<p>Creating a Pitchset is very similar to creating a Job. Pass a <a href="#job-templates">JobTemplate</a> and answers for that JobTemplate&rsquo;s <a href="#prompts">Prompts</a>.</p>
-
-<p>Either a list of <a href="#industries">Industries</a> or a single <a href="#specialties">Specialty</a> must also be included.</p>
-
-<p>Guidelines are optional.</p>
+<p>Creating a Pitchset is very similar to creating a Job. Pass a <a href="#job-templates">JobTemplate</a> and answers for that JobTemplate&rsquo;s <a href="#prompts">Prompts</a>. Either a list of <a href="#industries">Industries</a> or a single <a href="#specialties">Specialty</a> must also be included. Guidelines are optional.</p>
 
 <aside class="warning">The JobTemplate you pick must have a ContentFormat whose pitchable is true!</aside>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">job_template</code></td>
+<td><strong>Required</strong> Pick a <code class="prettyprint">JobTemplate</code> with a <code class="prettyprint">ContentFormat</code> whose <code class="prettyprint">pitchable</code> is true.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">tagline</code></td>
+<td><strong>Required</strong> Attract and engage writers with a catchy tagline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">number_of_jobs_requested</code></td>
+<td><strong>Optional</strong> We&rsquo;ll pitch you twice as many ideas as the number of jobs you request.  Defaults to <code class="prettyprint">1</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">industries</code></td>
+<td><strong>Required unless Specialty is passed</strong> A list of high-level categories pertaining to your job.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">specialty</code></td>
+<td><strong>Required unless Industries are passed</strong> A deeper field of knowledge.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">guidelines</code></td>
+<td><strong>Optional</strong> Tone, Voice and Perspective.</td>
+</tr>
+</tbody></table>
 
           <h2 id="list-all-pitchsets">List all Pitchsets</h2>
 <pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Pitchset</span><span class="p">.</span><span class="nf">all</span>
@@ -556,21 +612,69 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
 
           <h1 id="pitches">Pitches</h1>
 
+<blockquote>
+<p>Sample Pitch</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec24a6e02a37e7000772"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ergonomic Cotton Pants"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What are pants? You'll find out in this thrilling tale of rapid iteration in the garment industry. Wool to Cotton. Warm to Wearable. Economic to Ergonomic. I'll cover everything from the shoes to the belt and leave your readers craving new pants."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"awaiting review"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-24T23:00:52Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-07T17:09:05Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"pitchset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec24a6e02a37e7000768"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"tagline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I'm a Traveling Pants Salesman. Pitch me Content Marketing ideas!"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"writer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec23a6e02a37e70006ef"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jeffrey Lebowski"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"favorite"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Pitches are individual topic ideas pitched by Writers. You can accept or reject Pitches. If you accept a Pitch, it becomes a <a href="#jobs">Job</a>, to be completed by the Writer who pitched the idea.</p>
+
+<p>Pitches are nested within <a href="#pitchsets">Pitchsets</a>, so all actions are namespaced under the URL of the Pitch&rsquo;s Pitchset.</p>
+
           <h2 id="list-all-pitches-within-a-pitchset">List all Pitches within a Pitchset</h2>
+<pre class="highlight ruby"><code><span class="n">pitchset</span> <span class="o">=</span> <span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Pitchset</span><span class="p">.</span><span class="nf">all</span><span class="p">.</span><span class="nf">first</span>
+<span class="n">pitchset</span><span class="p">.</span><span class="nf">pitches</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/pitchsets/5ceb8bb8235bcc76bf475e21/pitches
+</code></pre>
 
 <p><code class="prettyprint">GET /:organization_key/v1/pitchsets/:pitchset_id/pitches</code></p>
 
           <h2 id="accept-a-pitch">Accept a Pitch</h2>
-
-<p><code class="prettyprint">POST /:organization_key/v1/pitches/:id/accept</code></p>
+<pre class="highlight ruby"><code><span class="n">pitchset</span> <span class="o">=</span> <span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Pitchset</span><span class="p">.</span><span class="nf">requires_action</span><span class="p">.</span><span class="nf">first</span>
+<span class="n">pitch</span> <span class="o">=</span> <span class="n">pitchset</span><span class="p">.</span><span class="nf">pitches</span><span class="p">.</span><span class="nf">first</span>
+<span class="n">pitch</span><span class="p">.</span><span class="nf">accept</span><span class="p">(</span><span class="s2">"This is some optional feedback to the Writer"</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/pitchsets/5ceb8bb8235bcc76bf475e21/pitches/5def8bb8235bcc76bf345d5e/accept <span class="se">\</span>
+    -d <span class="nv">feedback</span><span class="o">=</span><span class="s2">"You're just a straight shooter with upper management written all over you!"</span>
+</code></pre>
 
 <p><code class="prettyprint">POST /:organization_key/v1/pitchsets/:pitchset_id/pitches/:id/accept</code></p>
 
-          <h2 id="reject-a-pitch">Reject a Pitch</h2>
+<p>You can pass <code class="prettyprint">feedback</code> in the body of the <code class="prettyprint">POST</code> request to <code class="prettyprint">accept</code> a Pitch. Feedback will be passed along to the writer for guidance in writing the Job.</p>
 
-<p><code class="prettyprint">POST /:organization_key/v1/pitches/:id/reject</code></p>
+          <h2 id="reject-a-pitch">Reject a Pitch</h2>
+<pre class="highlight ruby"><code><span class="n">pitchset</span> <span class="o">=</span> <span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Pitchset</span><span class="p">.</span><span class="nf">requires_action</span><span class="p">.</span><span class="nf">first</span>
+<span class="n">pitch</span> <span class="o">=</span> <span class="n">pitchset</span><span class="p">.</span><span class="nf">pitches</span><span class="p">.</span><span class="nf">first</span>
+<span class="n">pitch</span><span class="p">.</span><span class="nf">reject</span><span class="p">(</span><span class="s2">"This is some optional feedback to the Writer"</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/pitchsets/5ceb8bb8235bcc76bf475e21/pitches/5def8bb8235bcc76bf345d5e/reject <span class="se">\</span>
+    -d <span class="nv">feedback</span><span class="o">=</span><span class="s2">"Not quite what we were looking for. Try making it funnier."</span>
+</code></pre>
 
 <p><code class="prettyprint">POST /:organization_key/v1/pitchsets/:pitchset_id/pitches/:id/reject</code></p>
+
+<p>You can pass <code class="prettyprint">feedback</code> in the body of the <code class="prettyprint">POST</code> request to <code class="prettyprint">reject</code> a Pitch. Feedback will be passed along to the writer for guidance in coming up with future topic ideas.</p>
 
           <h1 id="job-templates">Job Templates</h1>
 <pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">JobTemplate</span><span class="p">.</span><span class="nf">all</span>
@@ -672,6 +776,10 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<p>Embedded within each <a href="#job-templates">JobTemplate</a> is a <code class="prettyprint">ContentFormat</code>. By default, the <code class="prettyprint">ContentFormats</code> we offer are: Standard Blog Post, Long Blog Post, Website Page, Article, Facebook Posts, Tweets, Press Release, Video Script, Product Descriptions.</p>
+
+<aside class="info">Get in touch if you have a custom format need! For instance, if you are building an integration to generate an original Product Description everytime you add a new product to your database, we&rsquo;ll set you up with a custom Product Description format.</aside>
 
           <h1 id="prompts">Prompts</h1>
 
