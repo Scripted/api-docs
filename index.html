@@ -202,9 +202,6 @@ and <code class="prettyprint">abcdefghij0123456789</code> with your Token!</p>
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ebfc93be3b2c623b6e2a"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Education"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -362,9 +359,165 @@ curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <sp
 
           <h1 id="pitchsets">Pitchsets</h1>
 
+<blockquote>
+<p>Sample Pitchset</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec23a6e02a37e70006f2"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tagline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool Ideas for Zoo-centric Content"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"number_of_jobs_requested"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"number_of_pitches_accepted"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"number_of_pitches_rejected"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"number_of_pitches_awaiting_review"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"specialty"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ebfc93be3b2c623b6ea8"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Physical Fitness"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"guidelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ebfc93be3b2c623b6e60"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1st Personal Singular"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Voice"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"industries"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"568da92bfdcedc00e4000000"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"analytics.pptx"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Use this data in your pitches"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Data"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://zoos.com/analytics.pptx"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-06T15:54:19-08:00"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"prompts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec23a6e02a37e70006f6"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string[255]"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Target Audience"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Describe the particular group at which your content is aimed"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kittens of all types: Frat Kittens, Gamer Kittens, Hackysack Kittens, Tech Kittens, and Kitten Kittens"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"answer_required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"content_format"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5654ec02a6e02a37e70000d5"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Standard Blog Post"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pitchable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"length_metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"350-450 words"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity_options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p>Our writers can pitch you content ideas. A Pitchset is a lot like a <a href="#jobs">Job</a> (it&rsquo;s forged from a <a href="#job-templates">JobTemplate</a> with <a href="#prompts">Prompt</a> answers, <a href="#industries">Industries</a> and <a href="#guidelines">Guidelines</a>), but instead of being a request for writing, it is a request for <a href="#pitches">topics to be pitched by our writers</a>.</p>
 
+<p><code class="prettyprint">status</code> can be any of the following:</p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>active</td>
+<td>Writers are generating topic pitches.</td>
+</tr>
+<tr>
+<td>full</td>
+<td>Writers have finished pitching ideas.</td>
+</tr>
+<tr>
+<td>marked_complete</td>
+<td>You archived the pitchset.</td>
+</tr>
+<tr>
+<td>auto_closed</td>
+<td>You accepted as many pitches as you initially requested.</td>
+</tr>
+<tr>
+<td>idle</td>
+<td>Writers are no longer pitching topics, because you have not responded to pitches.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="create-a-pitchset">Create a Pitchset</h2>
+
+          <h2 id="list-all-pitchsets">List all Pitchsets</h2>
+<pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Pitchset</span><span class="p">.</span><span class="nf">all</span>
+
+<span class="c1"># Or if you want to filter by state</span>
+
+<span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Pitchset</span><span class="p">.</span><span class="nf">requires_action</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/pitchsets
+
+<span class="c"># Or if you want to filter by state</span>
+
+curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/pitchsets/requires_action
+</code></pre>
+
+<p><code class="prettyprint">GET /:organization_key/v1/pitchsets</code></p>
+
+<p>You can pass any of the following filters to narrow your search:</p>
+
+<table><thead>
+<tr>
+<th>Filter</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>open</td>
+<td>All Pitchsets in <code class="prettyprint">active</code>, <code class="prettyprint">full</code>, and <code class="prettyprint">idle</code> states. The &ldquo;Active&rdquo; section of your &ldquo;Topic Pitches&rdquo; tab in the Scripted dashboard.</td>
+</tr>
+<tr>
+<td>closed</td>
+<td>All Pitchset in <code class="prettyprint">marked_complete</code> and <code class="prettyprint">auto_closed</code> states. The &ldquo;Archived&rdquo; section of your &ldquo;Topic Pitches&rdquo; tab in the Scripted dashboard.</td>
+</tr>
+<tr>
+<td>requires_action</td>
+<td><code class="prettyprint">open</code> Pitchsets with at least one pending Pitch. The &ldquo;Action Items&rdquo; tab in the Scripted Dashboard</td>
+</tr>
+</tbody></table>
+
+          <h2 id="show-a-pitchset">Show a Pitchset</h2>
+
+<blockquote>
+<p>Don&rsquo;t forget to replace <code class="prettyprint">5ceb8bb8235bcc76bf475e21</code> with the <code class="prettyprint">ID</code> of one of your pitchsets!</p>
+</blockquote>
+<pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">Pitchset</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s1">'5ceb8bb8235bcc76bf475e21'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization: Bearer abcdefghij0123456789"</span> <span class="se">\</span>
+    https://api.scripted.com/abcd1234/v1/pitchsets/5ceb8bb8235bcc76bf475e21
+</code></pre>
+
+<p><code class="prettyprint">GET /:organization_key/v1/pitchsets/:id</code></p>
+
           <h1 id="pitches">Pitches</h1>
+
+          <h2 id="list-all-pitches-within-a-pitchset">List all Pitches within a Pitchset</h2>
+
+<p><code class="prettyprint">GET /:organization_key/v1/pitchsets/:pitchset_id/pitches</code></p>
+
+          <h2 id="accept-a-pitch">Accept a Pitch</h2>
+
+<p><code class="prettyprint">POST /:organization_key/v1/pitches/:id/accept</code></p>
+
+<p><code class="prettyprint">POST /:organization_key/v1/pitchsets/:pitchset_id/pitches/:id/accept</code></p>
+
+          <h2 id="reject-a-pitch">Reject a Pitch</h2>
+
+<p><code class="prettyprint">POST /:organization_key/v1/pitches/:id/reject</code></p>
+
+<p><code class="prettyprint">POST /:organization_key/v1/pitchsets/:pitchset_id/pitches/:id/reject</code></p>
 
           <h1 id="job-templates">Job Templates</h1>
 <pre class="highlight ruby"><code><span class="no">ScriptedClient</span><span class="o">::</span><span class="no">JobTemplate</span><span class="p">.</span><span class="nf">all</span>
