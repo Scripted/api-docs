@@ -13,3 +13,7 @@
   ]
 }
 ```
+
+Embedded within each [JobTemplate](#job-templates) is a `ContentFormat`. By default, the `ContentFormats` we offer are: Standard Blog Post, Long Blog Post, Website Page, Article, Facebook Posts, Tweets, Press Release, Video Script, Product Descriptions.
+
+<aside class="info">Get in touch if you have a custom format need! For instance, if you are building an integration to generate an original Product Description everytime you add a new product to your database, we'll set you up with a custom Product Description format.</aside>

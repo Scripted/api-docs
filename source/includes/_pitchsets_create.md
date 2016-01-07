@@ -49,11 +49,15 @@ curl -H "Authorization: Bearer abcdefghij0123456789" \
 
 `POST /:organization_key/v1/pitchsets`
 
-Creating a Pitchset is very similar to creating a Job. Pass a [JobTemplate](#job-templates) and answers for that JobTemplate's [Prompts](#prompts).
-
-Either a list of [Industries](#industries) or a single [Specialty](#specialties) must also be included.
-
-Guidelines are optional.
+Creating a Pitchset is very similar to creating a Job. Pass a [JobTemplate](#job-templates) and answers for that JobTemplate's [Prompts](#prompts). Either a list of [Industries](#industries) or a single [Specialty](#specialties) must also be included. Guidelines are optional.
 
 <aside class="warning">The JobTemplate you pick must have a ContentFormat whose pitchable is true!</aside>
 
+Parameter | Description
+--------------------------------- | -------
+`job_template`  |  **Required** Pick a `JobTemplate` with a `ContentFormat` whose `pitchable` is true.
+`tagline` |  **Required** Attract and engage writers with a catchy tagline.
+`number_of_jobs_requested`  |  **Optional** We'll pitch you twice as many ideas as the number of jobs you request.  Defaults to `1`.
+`industries`  |  **Required unless Specialty is passed** A list of high-level categories pertaining to your job.
+`specialty`  |  **Required unless Industries are passed** A deeper field of knowledge.
+`guidelines`  |  **Optional** Tone, Voice and Perspective.

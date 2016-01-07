@@ -47,8 +47,13 @@ curl -H "Authorization: Bearer abcdefghij0123456789" \
 
 `POST /:organization_key/v1/jobs`
 
-To create a Job, pass a [JobTemplate](#job-templates) and answers for that JobTemplate's [Prompts](#prompts).
+To create a Job, pass a [JobTemplate](#job-templates) and answers for that JobTemplate's [Prompts](#prompts). Either a list of Industries or a single Specialty must also be included. Guidelines are optional.
 
-Either a list of Industries or a single Specialty must also be included.
-
-Guidelines are optional.
+Parameter | Description
+-------------------------------- | --------
+`job_template`  |  **Required** Pick a `JobTemplate` with a `ContentFormat` whose `pitchable` is true.
+`topic` |  **Required** What's this Job all about?
+`quantity`  |  **Optional** How many do you want?  Defaults to minimum of the `ContentFormat#quantity_options`.
+`industries`  |  **Required unless Specialty is passed** A list of high-level categories pertaining to your job.
+`specialty`  |  **Required unless Industries are passed** A deeper field of knowledge.
+`guidelines`  |  **Optional** Tone, Voice and Perspective.

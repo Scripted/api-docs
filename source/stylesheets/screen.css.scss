@@ -425,6 +425,10 @@ html, body {
       padding: 10px;
     }
 
+    td:first-child {
+      min-width:100px;
+    }
+
     tr:last-child {
       border-bottom: 1px solid #ccc;
     }
