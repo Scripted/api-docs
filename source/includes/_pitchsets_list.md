@@ -25,6 +25,6 @@ You can pass any of the following filters to narrow your search:
 Filter | Meaning
 ---------- | -------
 open  |  All Pitchsets in `active`, `full`, and `idle` states. The "Active" section of your "Topic Pitches" tab in the Scripted dashboard.
-closed  |  All Pitchset in `marked_complete` and `auto_closed` states. The "Archived" section of your "Topic Pitches" tab in the Scripted dashboard.
-requires_action  |  `open` Pitchsets with at least one pending Pitch. The "Action Items" tab in the Scripted Dashboard
+closed  |  All Pitchsets in `marked_complete` and `auto_closed` states. The "Archived" section of your "Topic Pitches" tab in the Scripted dashboard.
+requires_action  |  Pitchsets in the `open` state with at least one pending Pitch. The "Action Items" tab in the Scripted dashboard.
 
